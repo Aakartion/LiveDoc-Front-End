@@ -1,4 +1,4 @@
-import { Inter as FontSans } from "next/font/google";
+import { Inter as FontSans, Limelight } from "next/font/google";
 
 import "./globals.css";
 

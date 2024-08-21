@@ -1,11 +1,11 @@
-'user server';
+'use server';
 
 import {nanoid} from 'nanoid';
 import liveblocks from '../liveblocks';
 import { revalidatePath } from 'next/cache';
 import { parseStringify } from '../utils';
 
-export const createDocumen  = async ({userId, email}: CreateDocumentParams) =>{
+export const createDocument  = async ({userId, email}: CreateDocumentParams) =>{
     const roomId = nanoid();
 
     try {
@@ -23,7 +23,7 @@ export const createDocumen  = async ({userId, email}: CreateDocumentParams) =>{
         const room = await liveblocks.createRoom(roomId, {
             metadata,
             usersAccesses,
-            defaultAccesses:[]
+            defaultAccesses:['room:write']
           });
         
         revalidatePath('/');
@@ -33,4 +33,18 @@ export const createDocumen  = async ({userId, email}: CreateDocumentParams) =>{
     } catch (error) {
         console.log(`ERROR happened while creating a room: ${error}`)
     }
+}
+
+export const getDocument = async({roomId, userId}:{roomId:string; userId:string})=>{
+try {
+    const room = await liveblocks.getRoom(roomId);
+    // const hasAccess = Object.keys(room.usersAccesses).includes(userId);
+
+    // if(!hasAccess){
+    //     throw new Error("You dont have access to this document");
+    // }
+    return parseStringify(room);
+} catch (error) {
+    console.log(`Error happene while getting a room:${error}`)
+}
 }

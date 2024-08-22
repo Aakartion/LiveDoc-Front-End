@@ -18,9 +18,9 @@ const CollaborativeRoom = ({
           <Header>
             <div className="flex w-fit items-center justify-center gap-2">
               <p className="document-title">Share</p>
-              <div className="flex w-full flex-1 justify-end gap-2 sm:gap-3">
-                <ActiveCollaborators />
-              </div>
+            </div>
+            <div className="flex w-full flex-1 justify-end gap-2 sm:gap-3">
+              <ActiveCollaborators />
               <SignedOut>
                 <SignInButton />
               </SignedOut>
